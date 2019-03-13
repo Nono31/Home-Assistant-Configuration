@@ -1,0 +1,10 @@
+qubino:
+  name: Qubino Modes
+  options:
+    - Off
+    - Anti-Freeze
+    - Eco
+    - Comfort -2
+    - Comfort -1
+    - Comfort
+  initial: Eco

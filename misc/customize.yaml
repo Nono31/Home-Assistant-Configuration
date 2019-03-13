@@ -1,0 +1,12 @@
+sensor.0a520102f20100d5330169_temperature:
+  friendly_name: "Office Temperature"
+  icon: mdi:thermometer
+sensor.0a520101600100bc400069_temperature:
+  friendly_name: "Léon Bedroom Temperature"
+  icon: mdi:thermometer
+sensor.0a5201035d0100c03e0079_temperature:
+  friendly_name: "Bedroom Temperature"
+  icon: mdi:thermometer
+sensor.0a520104f50200d0420169_temperature:
+  friendly_name: "Bathroom Temperature"
+  icon: mdi:thermometer
