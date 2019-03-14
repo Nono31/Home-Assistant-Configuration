@@ -1,12 +1,122 @@
-sensor.0a520102f20100d5330169_temperature:
+# rfxtrx
+sensor.0a520103f20100d1350179_temperature:
   friendly_name: "Office Temperature"
   icon: mdi:thermometer
-sensor.0a520101600100bc400069_temperature:
+sensor.0a520101600100bd3d0079_temperature:
   friendly_name: "Léon Bedroom Temperature"
   icon: mdi:thermometer
-sensor.0a5201035d0100c03e0079_temperature:
+sensor.0a5201005d0100c03b0079_temperature:
   friendly_name: "Bedroom Temperature"
   icon: mdi:thermometer
-sensor.0a520104f50200d0420169_temperature:
+sensor.0a520102f50200bf450079_temperature:
   friendly_name: "Bathroom Temperature"
   icon: mdi:thermometer
+# Zwave zmnhud1
+light.qubino_zmnhud1_din_pilot_wire_level:
+  friendly_name: "Livingroom Heater Level"
+light.qubino_zmnhud1_din_pilot_wire_level_2:
+  friendly_name: "Bedroom Heater Level"
+light.qubino_zmnhud1_din_pilot_wire_level_3:
+  friendly_name: "Léon Bedroom Heater Level"
+light.qubino_zmnhud1_din_pilot_wire_level_4:
+  friendly_name: "Office Heater Level"
+light.qubino_zmnhud1_din_pilot_wire_level_5:
+  friendly_name: "Bathroom Heater Level"
+binary_sensor.qubino_zmnhud1_din_pilot_wire_sensor:
+  hidden: yes
+switch.qubino_zmnhud1_din_pilot_wire_switch:
+  hidden: yes
+binary_sensor.qubino_zmnhud1_din_pilot_wire_sensor_2:
+  hidden: yes
+switch.qubino_zmnhud1_din_pilot_wire_switch_2:
+  hidden: yes
+binary_sensor.qubino_zmnhud1_din_pilot_wire_sensor_3:
+  hidden: yes
+switch.qubino_zmnhud1_din_pilot_wire_switch_3:
+  hidden: yes
+binary_sensor.qubino_zmnhud1_din_pilot_wire_sensor_4:
+  hidden: yes
+switch.qubino_zmnhud1_din_pilot_wire_switch_4:
+  hidden: yes
+binary_sensor.qubino_zmnhud1_din_pilot_wire_sensor_5:
+  hidden: yes
+switch.qubino_zmnhud1_din_pilot_wire_switch_5:
+  hidden: yes
+# Zwave hrt4 Livingroom
+sensor.horstmann_hrt4_zw_thermostat_transmitter_temperature:
+  friendly_name: "Livingroom Temperature"
+  icon: mdi:thermometer
+climate.horstmann_hrt4_zw_thermostat_transmitter_heating_1:
+  hidden: yes
+switch.horstmann_hrt4_zw_thermostat_transmitter_switch:
+  hidden: yes
+# Zwave Qubino Hallway
+switch.qubino_zmnhsdx_din_dimmer_switch:
+  friendly_name: Hallway Light
+  icon: mdi:lightbulb
+light.qubino_zmnhsdx_din_dimmer_level:
+  hidden: true
+sensor.qubino_zmnhsdx_din_dimmer_energy:
+  hidden: true
+sensor.qubino_zmnhsdx_din_dimmer_previous_reading:
+  hidden: true
+# Zwave Fibaro Livingroom
+sensor.fibaro_system_fgms001_zw5_motion_sensor_burglar:
+  friendly_name: Livingroom Fibaro Motion
+  icon: mdi:security
+sensor.fibaro_system_fgms001_zw5_motion_sensor_luminance:
+  friendly_name: Livingroom Fibaro Luminance
+  icon: mdi:brightness-7
+sensor.fibaro_system_fgms001_zw5_motion_sensor_temperature:
+  friendly_name: Livingroom Fibaro Temperature
+  icon: mdi:thermometer
+sensor.fibaro_system_fgms001_zw5_motion_sensor_seismic_intensity:
+  friendly_name: Livingroom Fibaro Seismic
+  icon: mdi:thermometer
+sensor.fibaro_system_fgms001_zw5_motion_sensor_alarm_level:
+  hidden: yes
+sensor.fibaro_system_fgms001_zw5_motion_sensor_alarm_type:
+  hidden: yes
+sensor.fibaro_system_fgms001_zw5_motion_sensor_general:
+  hidden: yes
+sensor.fibaro_system_fgms001_zw5_motion_sensor_sourcenodeid:
+  hidden: yes
+binary_sensor.fibaro_system_fgms001_zw5_motion_sensor_sensor:
+  hidden: yes
+# Zwave Fibaro Hallway
+sensor.fibaro_system_fgms001_zw5_motion_sensor_burglar_2:
+  friendly_name: Hallway Fibaro Motion
+  icon: mdi:security
+sensor.fibaro_system_fgms001_zw5_motion_sensor_luminance_2:
+  friendly_name: Hallway Fibaro Luminance
+  icon: mdi:brightness-7
+sensor.fibaro_system_fgms001_zw5_motion_sensor_temperature_2:
+  friendly_name: Hallway Fibaro Temperature
+  icon: mdi:thermometer
+sensor.fibaro_system_fgms001_zw5_motion_sensor_seismic_intensity_2:
+  friendly_name: Hallway Fibaro Seismic
+  icon: mdi:thermometer
+sensor.fibaro_system_fgms001_zw5_motion_sensor_alarm_level_2:
+  hidden: yes
+sensor.fibaro_system_fgms001_zw5_motion_sensor_alarm_type_2:
+  hidden: yes
+sensor.fibaro_system_fgms001_zw5_motion_sensor_general_2:
+  hidden: yes
+sensor.fibaro_system_fgms001_zw5_motion_sensor_sourcenodeid_2:
+  hidden: yes
+binary_sensor.fibaro_system_fgms001_zw5_motion_sensor_sensor_2:
+  hidden: yes
+# netatmo
+sensor.netatmo_indoor_co2:
+  friendly_name: Livingroom CO2
+sensor.netatmo_indoor_humidity:
+  friendly_name: Livingroom Humidity
+sensor.netatmo_indoor_noise:
+  friendly_name: Livingroom Noise
+sensor.netatmo_indoor_pressure:
+  friendly_name: Livingroom Pressure
+sensor.netatmo_outdoor_temperature:
+  friendly_name: Outdoor Temperature
+  icon: mdi:thermometer
+sensor.netatmo_outdoor_humidity:
+  friendly_name: Outdoor Humidity
