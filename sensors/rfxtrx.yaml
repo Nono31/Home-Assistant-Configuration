@@ -1,21 +1,21 @@
 platform: rfxtrx
 devices:
-  0a520102f20100d5330169_temperature:
+  0a520103f20100d1350179:
     name: Office
     data_type:
       - Humidity
       - Temperature
-  0a520101600100bc400069_temperature:
+  0a520101600100bd3d0079:
     name: Bedroom_Leon
     data_type:
       - Humidity
       - Temperature
-  0a5201035d0100c03e0079_temperature:
+  0a5201005d0100c03b0079:
     name: Bedroom_Parent
     data_type:
       - Humidity
       - Temperature
-  0a520104f50200d0420169_temperature:
+  0a520102f50200bf450079:
     name: Bathroom
     data_type:
       - Humidity

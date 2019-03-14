@@ -1,10 +1,19 @@
-qubino:
+hass_mode:
+  name: Home assistant Modes
+  options:
+    - Shutdown
+    - Away
+    - Home
+    - Vacances
+
+qubino_heater_mode:
   name: Qubino Modes
   options:
-    - Off
-    - Anti-Freeze
-    - Eco
-    - Comfort -2
-    - Comfort -1
-    - Comfort
-  initial: Eco
+    - 'Off'
+    - 'Anti-Freeze'
+    - 'Eco'
+    - 'Comfort -2'
+    - 'Comfort -1'
+    - 'Comfort'
+  initial: 'Eco'
+  icon: mdi:radiator

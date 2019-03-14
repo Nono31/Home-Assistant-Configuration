@@ -1,0 +1,13 @@
+platform: generic_thermostat
+name: Livingroom
+heater: light.qubino_zmnhud1_din_pilot_wire_level
+target_sensor: sensor.horstmann_hrt4_zw_thermostat_transmitter_temperature
+min_temp: 16
+max_temp: 26
+ac_mode: false
+target_temp: 21
+min_cycle_duration:
+  seconds: 30
+cold_tolerance: 0.2
+hot_tolerance: 0
+away_temp: 18

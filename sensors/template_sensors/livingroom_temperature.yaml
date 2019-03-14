@@ -1,0 +1,6 @@
+platform: template
+sensors:
+  livingroom_target_temperature:
+    value_template: '{{ climate.horstmann_hrt4_zw_thermostat_transmitter_heating_1.attributes.temperature }}'
+    friendly_name: "Livingroom Temperature"
+    unit_of_measurement: '°C'

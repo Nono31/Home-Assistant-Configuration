@@ -13,19 +13,45 @@ homeassistant:
   # Customization file
   customize: !include misc/customize.yaml
 
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+http:
+  ssl_certificate: !secret ssl_certificate_path
+  ssl_key: !secret ssl_key_path
+
+
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
 # Show the introduction message on startup.
 introduction:
 
-# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-# http:
-#   base_url: example.duckdns.org:8123
+history:
 
+logger:
+  default: info
+  logs:
+    homeassistant.components.zwave: info
+
+recorder:
+  purge_keep_days: 7
+
+#Logbook
+logbook:
+  include:
+    domains:
+      - sensor
 # Text to speech
 tts:
   - platform: google
+
+sun:
+
+discovery:
+
+#upnp:
+#  port_mapping: false
 
 #MQTT
 mqtt:
@@ -58,6 +84,7 @@ rfxtrx:
 ###########INCLUDES#####
 alert: !include_dir_merge_named alerts/
 input_boolean: !include misc/input_boolean.yaml
+input_number: !include misc/input_number.yaml
 input_select: !include misc/input_select.yaml
 binary_sensor: !include_dir_list binary_sensors/
 sensor: !include_dir_list sensors/
@@ -66,3 +93,4 @@ automation: !include automations.yaml
 script: !include_dir_merge_named scripts/
 zone: !include_dir_list zones/
 weather: !include_dir_list weather/
+climate: !include_dir_list climate/
