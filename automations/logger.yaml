@@ -1,0 +1,9 @@
+- alias: Create notifications for errors
+  trigger:
+    platform: event
+    event_type: system_log_event
+  action:
+  - service: notify.hass_discord
+    data_template:
+      target: !secret discord_channel
+      message: "[Logger] {{ trigger.event.data.message }}"

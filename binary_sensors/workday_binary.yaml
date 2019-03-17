@@ -1,0 +1,4 @@
+platform: workday
+country: FRA
+workdays: [mon, tue, wed, thu, fri]
+excludes: [sat, sun]

@@ -1,1 +1,79 @@
+default_view:
+  view: false
+  icon: mdi:home
+  entities:
+    - group.alarm_control_card
+    - group.climate
+
+alarm_automations_card:
+    name: Alarm Automations
+    entities:
+      - automation.alarm_send_notification_when_alarm_is_disarmed
+      - automation.alarm_send_notification_when_alarm_triggered
+      - automation.alarm_trigger_alarm_while_armed_away
+
+alarm_control_card:
+    name: Alarm Control
+    entities:
+      - alarm_control_panel.home_alarm
+
+alarm_clock_card:
+    name: Alarm Clock
+    entities: 
+
+climate:
+    name: Climate
+    view: false
+    entities: 
+      - sensor.horstmann_hrt4_zw_thermostat_transmitter_temperature
+      - sensor.netatmo_indoor_humidity
+      - sensor.bedroom_leon_humidity
+      - sensor.bedroom_leon_temperature
+      - sensor.bedroom_parent_humidity
+      - sensor.bedroom_parent_temperature
+      - sensor.bathroom_humidity
+      - sensor.bathroom_temperature
+      - climate.bathroom
+      - climate.leon_bedroom
+      - climate.livingroom
+      - climate.office
+      - climate.parent_bedroom
+
+climate_view:
+    name: Climate
+    view: yes
+    entities: 
+      - climate.bathroom
+      - climate.leon_bedroom
+      - climate.livingroom
+      - climate.office
+      - climate.parent_bedroom
+
+
+Livingroom_view:
+    name: Livingroom
+    view: yes
+    entities: 
+      - media_player.kodi
+
+    
+admin_view:
+    name: Admin
+    icon: mdi:settings
+    view: yes
+    entities:
+      - group.input_boolean
+      - group.all_switches
+      - group.all_automations
+      - group.all_covers
+      - group.all_lights
+      - group.all_scripts
+      - group.all_devices
+
+      
+watering:
+    name: Watering
+    view: yes
+    icon: mdi:flower
+    entities: 
 

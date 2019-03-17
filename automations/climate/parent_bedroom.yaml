@@ -1,0 +1,99 @@
+#parent bedroom room timer
+- alias: '[Climate] Livingroom Thermostat turn timer on workday'
+  hide_entity: True
+  trigger:
+    - platform: time
+      at: '22:40:00' #Night cost
+  condition:
+    - condition: state
+      entity_id: 'binary_sensor.workday_sensor'
+      state: 'on'
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.heater_parent_bedroom_timer
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing Parent bedroom mode: timer on"
+- alias: '[Climate] Parent bedroom Thermostat turn timer off workday'
+  hide_entity: True
+  trigger:
+    - platform: time
+      at: '07:00:00'
+  condition:
+    - condition: state
+      entity_id: 'binary_sensor.workday_sensor'
+      state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.heater_parent_bedroom_timer
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing Parent bedroom mode: timer off"
+- alias: '[Climate] Parent bedroom Thermostat turn timer on weekend'
+  hide_entity: True
+  trigger:
+    - platform: time
+      at: '22:40:00' # Night cost
+  condition:
+    - condition: state
+      entity_id: 'binary_sensor.workday_sensor'
+      state: 'off'
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.heater_parent_bedroom_timer
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing Parent bedroom mode: timer on"
+- alias: '[Climate] Parent bedroom Thermostat turn timer off weekend'
+  hide_entity: True
+  trigger:
+    - platform: time
+      at: '08:00:00'
+  condition:
+    - condition: state
+      entity_id: 'binary_sensor.workday_sensor'
+      state: 'off'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.heater_parent_bedroom_timer
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing Parent bedroom mode: timer off"
+- alias: '[Climate] Parent bedroom climate away mode off when timer on'
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: input_boolean.heater_parent_bedroom_timer
+      to: 'on'
+  action:
+    - service: climate.set_away_mode
+      data:
+        entity_id:  climate.parent_bedroom
+        away_mode: 'off'
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing Parent bedroom heater: away mode off"
+- alias: '[Climate] Parent bedroom climate away mode on when timer off'
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: input_boolean.heater_parent_bedroom_timer
+      to: 'off'
+  action:
+    - service: climate.set_away_mode
+      data:
+        entity_id:  climate.Parent bedroom
+        away_mode: 'on'
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing Parent bedroom heater: away mode on"

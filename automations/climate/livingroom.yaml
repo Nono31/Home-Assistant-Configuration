@@ -1,0 +1,129 @@
+#Sync with sensor.livingroom_target_temperature
+- alias: '[Climate] Initialize livingroom climate target temperature on Hass Started'
+  initial_state: 'on'
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.livingroom
+        temperature: sensor.livingroom_target_temperature
+- alias: '[Climate] Living target Temperature changed'
+  trigger:
+    platform: state
+    entity_id: sensor.livingroom_target_temperature
+    #for:
+    #  seconds: 15  
+  action:
+    - service: climate.set_temperature
+      data_template:
+        entity_id: climate.livingroom
+        temperature: '{{ sensor.livingroom_target_temperature | float }}'
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] New living room target temperature : {{ trigger.to_state.state }}"
+#Living room timer
+- alias: '[Climate] Livingroom Thermostat turn timer on workday'
+  hide_entity: True
+  trigger:
+    - platform: time
+      at: '16:15:00'
+    - platform: time
+      at: '06:30:00'
+  condition:
+    - condition: state
+      entity_id: 'binary_sensor.workday_sensor'
+      state: 'on'
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.heater_livingroom_timer
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing livingroom mode: timer on"
+- alias: '[Climate] Livingroom Thermostat turn timer off workday'
+  hide_entity: True
+  trigger:
+    - platform: time
+      at: '22:00:00'
+    - platform: time
+      at: '08:00:00'
+  condition:
+    - condition: state
+      entity_id: 'binary_sensor.workday_sensor'
+      state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.heater_livingroom_timer
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing livingroom mode: timer off"
+- alias: '[Climate] Livingroom Thermostat turn timer on weekend'
+  hide_entity: True
+  trigger:
+    - platform: time
+      at: '07:30:00'
+  condition:
+    - condition: state
+      entity_id: 'binary_sensor.workday_sensor'
+      state: 'off'
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.heater_livingroom_timer
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing livingroom mode: timer on"
+- alias: '[Climate] Livingroom Thermostat turn timer off weekend'
+  hide_entity: True
+  trigger:
+    - platform: time
+      at: '22:00:00'
+  condition:
+    - condition: state
+      entity_id: 'binary_sensor.workday_sensor'
+      state: 'off'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.heater_livingroom_timer
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing livingroom mode: timer off"
+- alias: '[Climate] Livingroom climate away mode off when timer on'
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: input_boolean.heater_livingroom_timer
+      to: 'on'
+  action:
+    - service: climate.set_away_mode
+      data:
+        entity_id:  climate.livingroom
+        away_mode: 'off'
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing livingroom heater: away mode off"
+- alias: '[Climate] Livingroom climate away mode on when timer off'
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: input_boolean.heater_livingroom_timer
+      to: 'off'
+  action:
+    - service: climate.set_away_mode
+      data:
+        entity_id:  climate.livingroom
+        away_mode: 'on'
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing livingroom heater: away mode on"

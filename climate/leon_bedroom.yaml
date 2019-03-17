@@ -1,11 +1,11 @@
 platform: generic_thermostat
-name: Bathroom
-heater: light.qubino_zmnhud1_din_pilot_wire_level_5
-target_sensor: sensor.bathroom_temperature
+name: Léon Bedroom
+heater: light.qubino_zmnhud1_din_pilot_wire_level_3
+target_sensor:  sensor.bedroom_leon_temperature
 min_temp: 16
 max_temp: 26
 ac_mode: false
-target_temp: 21
+target_temp: 20
 min_cycle_duration:
   minutes: 2
 cold_tolerance: 0.2

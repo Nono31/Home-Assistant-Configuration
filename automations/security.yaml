@@ -1,0 +1,40 @@
+- alias: '[Alarm] Trigger alarm while armed away'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.fibaro_system_fgms001_zw5_motion_sensor_burglar_2
+      above: 2
+    - platform: numeric_state
+      entity_id: sensor.fibaro_system_fgms001_zw5_motion_sensor_burglar_2
+      above: 2
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: armed_away
+  action:
+    - service: alarm_control_panel.alarm_trigger
+      entity_id:  alarm_control_panel.home_alarm
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[ALARM] Movement detected by {{ trigger.from_state.name }}, trigger alarm"
+- alias: '[Alarm] Send notification when alarm triggered'
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.home_alarm
+      to: 'triggered'
+  action:
+    - service: notify.hass_discord
+      data:
+        target: !secret discord_channel
+        message: "[ALARM] @here The alarm has been triggered"
+- alias: '[Alarm] Send notification when alarm is Disarmed'
+  initial_state: 'on'
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.home_alarm
+      to: 'disarmed'
+  action:
+    - service: notify.hass_discord
+      data:
+        target: !secret discord_channel
+        message: "[ALARM] The alarm is Disarmed at {{ states('sensor.date_time') }}"

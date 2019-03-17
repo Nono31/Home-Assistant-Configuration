@@ -1,0 +1,36 @@
+- id: test_a
+  alias: "Test Confort"
+  trigger:
+    - platform: state
+      entity_id:
+        - input_select.qubino
+      to: 'Confort'
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id: > 
+          {% if trigger.to_state.entity_id == 'input_select.qubino' %}
+            light.qubino_zmnhsdx_din_dimmer_level
+          {% endif %}
+        data:
+          brightness_pct: 99
+
+- id: test_b
+  alias: "Test Off"
+  trigger:
+    - platform: state
+      entity_id:
+        - input_select.qubino
+      to: 'Off'
+  action:
+    - service: notify.notify
+      data:
+        message: Testing conditional actions
+    - service: light.turn_off
+      data_template:
+        entity_id: > 
+          {% if trigger.to_state.entity_id == 'input_select.qubino' %}
+            light.qubino_zmnhsdx_din_dimmer_level
+          {% endif %}
+        data:
+          brightness_pct: 0

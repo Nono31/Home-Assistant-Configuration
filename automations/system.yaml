@@ -1,0 +1,63 @@
+# Monitoring
+- alias: '[System] Hass Started'
+  initial_state: 'on'
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    - service: notify.hass_discord
+      data:
+        target: !secret discord_channel
+        message: "[System] @here Hass.io Online"
+
+- alias: '[System] Hass Ready'
+  initial_state: 'on'
+  trigger:
+    platform: event
+    event_type: zwave.network_ready
+  action:
+    - service: notify.hass_discord
+      data:
+        target: !secret discord_channel
+        message: "[System] Z-wave network now ready"
+    - delay: 00:05
+    
+- alias: '[System] Hass Stopped'
+  initial_state: 'on'
+  trigger:
+    platform: homeassistant
+    event: shutdown
+  action:
+    - service: notify.hass_discord
+      data:
+        target: !secret discord_channel
+        message: "[System] @here Hass.io Offline"
+      
+- alias: '[System] Hass New Device Tracked'
+  trigger:
+    platform: event
+    event_type: device_tracker_new_device
+  action:
+    - service: notify.hass_discord
+      data_template:
+        message: >
+          New Device Tracked: {{trigger.event.data.host_name}} ({{trigger.event.data.entity_id}})
+        target: !secret discord_channel
+
+- alias: '[System] Hass Updater'
+  trigger:
+    - platform: state
+      entity_id: sensor.version_available
+  condition:
+    - condition: template
+      value_template: >-
+        {{
+          states('sensor.version_available')
+          !=
+          states('sensor.version_current')
+        }}
+  action:
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[System] Home Assistant {{ states.sensor.version_available.state }} is now available!"

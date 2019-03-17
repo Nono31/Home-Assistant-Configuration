@@ -17,6 +17,8 @@ homeassistant:
 # http:
 #   base_url: example.duckdns.org:8123
 http:
+  api_password: !secret api_password
+  server_port: !secret server_port
   ssl_certificate: !secret ssl_certificate_path
   ssl_key: !secret ssl_key_path
 
@@ -32,7 +34,10 @@ history:
 logger:
   default: info
   logs:
-    homeassistant.components.zwave: info
+    homeassistant.components.zwave: error
+    homeassistant.components.notify.discord: info
+    homeassistant.components.livebox: info
+    homeassistant.components.rfxtrx: info
 
 recorder:
   purge_keep_days: 7
@@ -49,6 +54,15 @@ tts:
 sun:
 
 discovery:
+
+# Discord
+notify:
+  - platform: discord
+    name: Hass Discord
+    token: !secret discord_token
+
+
+
 
 #upnp:
 #  port_mapping: false
@@ -81,7 +95,17 @@ zwave:
 rfxtrx:
   device: /dev/ttyUSB0
 
+#Kodi
+media_player:
+  - platform: kodi
+    name: Livingroom TV
+    host: 192.168.1.201
+
+device_tracker:
+  - platform: livebox
+
 ###########INCLUDES#####
+person: !include_dir_merge_list persons/
 alert: !include_dir_merge_named alerts/
 input_boolean: !include misc/input_boolean.yaml
 input_number: !include misc/input_number.yaml
@@ -89,8 +113,9 @@ input_select: !include misc/input_select.yaml
 binary_sensor: !include_dir_list binary_sensors/
 sensor: !include_dir_list sensors/
 group: !include groups.yaml
-automation: !include automations.yaml
+automation: !include_dir_merge_list automations/
 script: !include_dir_merge_named scripts/
 zone: !include_dir_list zones/
 weather: !include_dir_list weather/
 climate: !include_dir_list climate/
+alarm_control_panel: !include security/alarm.yaml

@@ -1,0 +1,7 @@
+platform: manual
+name: Home Alarm
+code: !secret alarm_pin
+pending_time: 60 #Leaving timer
+delay_time: 30 #Disam timer
+trigger_time: 120
+disarm_after_trigger: false

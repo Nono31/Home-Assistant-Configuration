@@ -1,0 +1,5 @@
+name: Aurelie work
+latitude: !secret aurelie_work_latitude
+longitude: !secret aurelie_work_longitude
+radius: 250
+icon: mdi:worker

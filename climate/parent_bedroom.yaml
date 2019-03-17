@@ -1,5 +1,5 @@
 platform: generic_thermostat
-name: Bedroom
+name: Parent Bedroom
 heater: light.qubino_zmnhud1_din_pilot_wire_level_2
 target_sensor: sensor.bedroom_parent_temperature
 min_temp: 16
@@ -7,7 +7,10 @@ max_temp: 26
 ac_mode: false
 target_temp: 20
 min_cycle_duration:
-  seconds: 30
+  minutes: 2
 cold_tolerance: 0.2
 hot_tolerance: 0
 away_temp: 18
+keep_alive:
+  minutes: 30
+initial_operation_mode: "auto"

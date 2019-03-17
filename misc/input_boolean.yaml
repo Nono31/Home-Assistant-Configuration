@@ -1,0 +1,6 @@
+heater_livingroom_timer:
+  name: Heater Livingroom Timer
+  icon: mdi:radiator
+heater_parent_bedroom_timer:
+  name: Heater Livingroom Timer
+  icon: mdi:radiator
