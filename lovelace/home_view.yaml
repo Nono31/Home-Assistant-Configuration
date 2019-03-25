@@ -1,0 +1,6 @@
+title: Home
+icon: mdi:home-assistant
+panel: true
+path: home
+
+cards:

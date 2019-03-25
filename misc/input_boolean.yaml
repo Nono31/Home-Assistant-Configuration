@@ -2,5 +2,11 @@ heater_livingroom_timer:
   name: Heater Livingroom Timer
   icon: mdi:radiator
 heater_parent_bedroom_timer:
-  name: Heater Livingroom Timer
+  name: Heater Parent Bedroom Timer
+  icon: mdi:radiator
+heater_leon_bedroom_timer:
+  name: Heater Leon Bedroom Timer
+  icon: mdi:radiator
+heater_bathroom_timer:
+  name: Heater Bathroom Timer
   icon: mdi:radiator

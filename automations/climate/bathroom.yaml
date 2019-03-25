@@ -1,0 +1,69 @@
+#Bathroom room timer
+- alias: '[Climate] Bathroom Thermostat turn timer on workday'
+  hide_entity: True
+  trigger:
+    - platform: time
+      at: '06:00:00'
+  condition:
+    - condition: template
+      value_template: "{{ not is_state('input_select.hass_mode', 'Extended Away') }}"
+    - condition: state
+      entity_id: 'binary_sensor.workday_sensor'
+      state: 'on'
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.heater_bathroom_timer
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing bathroom mode: timer on"
+- alias: '[Climate] Bathroom Thermostat turn timer off workday'
+  hide_entity: True
+  trigger:
+    - platform: time
+      at: '07:30:00'
+  condition:
+    - condition: template
+      value_template: "{{ not is_state('input_select.hass_mode', 'Extended Away') }}"
+    - condition: state
+      entity_id: 'binary_sensor.workday_sensor'
+      state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.heater_bathroom_timer
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing bathroom mode: timer off"
+- alias: '[Climate] Bathroom climate away mode off when timer on'
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: input_boolean.heater_bathroom_timer
+      to: 'on'
+  action:
+    - service: climate.set_away_mode
+      data:
+        entity_id:  climate.bathroom
+        away_mode: 'off'
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing bathroom heater: away mode off"
+- alias: '[Climate] Bathroom climate away mode on when timer off'
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: input_boolean.heater_bathroom_timer
+      to: 'off'
+  action:
+    - service: climate.set_away_mode
+      data:
+        entity_id:  climate.bathroom
+        away_mode: 'on'
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing bathroom heater: away mode on"

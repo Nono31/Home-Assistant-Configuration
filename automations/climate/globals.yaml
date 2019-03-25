@@ -1,0 +1,31 @@
+- alias: '[Climate] Climate away mode on when Extended away'
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: input_select.hass_mode
+      to: 'Extended Away'
+  action:
+    - service: climate.set_away_mode
+      data:
+        entity_id:  climate.bathroom
+        away_mode: 'on'
+    - service: climate.set_away_mode
+      data:
+        entity_id:  climate.livingroom
+        away_mode: 'on'
+    - service: climate.set_away_mode
+      data:
+        entity_id:  climate.leon_bedroom
+        away_mode: 'on'
+    - service: climate.set_away_mode
+      data:
+        entity_id:  climate.office
+        away_mode: 'on'
+    - service: climate.set_away_mode
+      data:
+        entity_id:  climate.parent_bedroom
+        away_mode: 'on'
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Turn away all heater"

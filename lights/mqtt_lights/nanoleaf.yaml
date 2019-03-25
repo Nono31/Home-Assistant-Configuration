@@ -1,0 +1,31 @@
+platform: mqtt
+name: "nanoleaf Strip"
+state_topic: "home/livingroom/nanoleaf"
+command_topic: "home/livingroom/nanoleaf/set"
+#availability_topic: "home/livingroom/nanoleaf/LWT"
+schema: json
+effect: true
+effect_list:
+  - bpm
+  - candy cane  
+  - confetti  
+  - cyclon rainbow  
+  - dots  
+  - fire  
+  - glitter  
+  - juggle  
+  - lightning
+  - noise  
+  - police all  
+  - police one  
+  - rainbow  
+  - rainbow with glitter  
+  - ripple  
+  - sinelon  
+  - solid  
+  - twinkle  
+brightness: true
+flash: true
+rgb: true
+optimistic: false
+qos: 0

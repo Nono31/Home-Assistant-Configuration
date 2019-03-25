@@ -3,8 +3,9 @@ hass_mode:
   options:
     - Shutdown
     - Away
+    - Guest
     - Home
-    - Vacances
+    - Extended Away
 
 qubino_heater_mode:
   name: Qubino Modes

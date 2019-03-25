@@ -1,0 +1,69 @@
+#Leon bedroom room timer
+- alias: '[Climate] Leon Bedroom Thermostat turn timer on workday'
+  hide_entity: True
+  trigger:
+    - platform: time
+      at: '19:30:00'
+  condition:
+    - condition: template
+      value_template: "{{ not is_state('input_select.hass_mode', 'Extended Away') }}"
+    - condition: state
+      entity_id: 'binary_sensor.workday_sensor'
+      state: 'on'
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.heater_leon_bedroom_timer
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing Leon bedroom mode: timer on"
+- alias: '[Climate] Leon bedroom Thermostat turn timer off workday'
+  hide_entity: True
+  trigger:
+    - platform: time
+      at: '07:30:00'
+  condition:
+    - condition: template
+      value_template: "{{ not is_state('input_select.hass_mode', 'Extended Away') }}"
+    - condition: state
+      entity_id: 'binary_sensor.workday_sensor'
+      state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.heater_leon_bedroom_timer
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing Leon bedroom mode: timer off"
+- alias: '[Climate] Leon bedroom climate away mode off when timer on'
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: input_boolean.heater_leon_bedroom_timer
+      to: 'on'
+  action:
+    - service: climate.set_away_mode
+      data:
+        entity_id:  climate.leon_bedroom
+        away_mode: 'off'
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing Leron bedroom heater: away mode off"
+- alias: '[Climate] Leon bedroom climate away mode on when timer off'
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: input_boolean.heater_leon_bedroom_timer
+      to: 'off'
+  action:
+    - service: climate.set_away_mode
+      data:
+        entity_id:  climate.leon_bedroom
+        away_mode: 'on'
+    - service: notify.hass_discord
+      data_template:
+        target: !secret discord_channel
+        message: "[Climate] Changing Leon bedroom heater: away mode on"

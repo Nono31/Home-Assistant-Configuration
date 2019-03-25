@@ -38,6 +38,7 @@ logger:
     homeassistant.components.notify.discord: info
     homeassistant.components.livebox: info
     homeassistant.components.rfxtrx: info
+    homeassistant.components.media_player: info
 
 recorder:
   purge_keep_days: 7
@@ -50,6 +51,13 @@ logbook:
 # Text to speech
 tts:
   - platform: google
+
+#lovelace:
+#  mode: yaml
+
+frontend:
+#  themes: !include_dir_named themes/
+  javascript_version: latest
 
 sun:
 
@@ -76,6 +84,12 @@ mqtt:
   password: !secret mqtt_password
   discovery: true
   discovery_prefix: homeassistant
+  birth_message:
+    topic: 'hass/status'
+    payload: 'online'
+  will_message:
+    topic: 'hass/status'
+    payload: 'offline'
 
 #Netatmo
 netatmo:
@@ -90,6 +104,7 @@ zwave:
   usb_path: /dev/ttyACM0
   network_key: !secret zwave_secret_key
   device_config: !include zwave_device_config.yaml
+  polling_interval: 60000
 
 #RfxCom
 rfxtrx:
@@ -98,14 +113,16 @@ rfxtrx:
 #Kodi
 media_player:
   - platform: kodi
-    name: Livingroom TV
+    name: Livingroom Kodi
     host: 192.168.1.201
+    port: 80
+    enable_websocket: false
 
 device_tracker:
   - platform: livebox
 
 ###########INCLUDES#####
-person: !include_dir_merge_list persons/
+person: !include_dir_list persons/
 alert: !include_dir_merge_named alerts/
 input_boolean: !include misc/input_boolean.yaml
 input_number: !include misc/input_number.yaml
@@ -119,3 +136,4 @@ zone: !include_dir_list zones/
 weather: !include_dir_list weather/
 climate: !include_dir_list climate/
 alarm_control_panel: !include security/alarm.yaml
+light: !include_dir_list lights/

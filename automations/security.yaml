@@ -2,10 +2,10 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.fibaro_system_fgms001_zw5_motion_sensor_burglar_2
-      above: 2
+      above: 4
     - platform: numeric_state
       entity_id: sensor.fibaro_system_fgms001_zw5_motion_sensor_burglar_2
-      above: 2
+      above: 4
   condition:
     - condition: state
       entity_id: alarm_control_panel.home_alarm
@@ -27,6 +27,23 @@
       data:
         target: !secret discord_channel
         message: "[ALARM] @here The alarm has been triggered"
+- alias: '[Alarm] Send notification when alarm is Armed'
+  initial_state: 'on'
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.home_alarm
+      to: 'armed_home'
+    - platform: state
+      entity_id: alarm_control_panel.home_alarm
+      to: 'armed_away'
+    - platform: state
+      entity_id: alarm_control_panel.home_alarm
+      to: 'armed_night'
+  action:
+    - service: notify.hass_discord
+      data:
+        target: !secret discord_channel
+        message: "[ALARM] The alarm is Armed at {{ states('sensor.date_time') }}"
 - alias: '[Alarm] Send notification when alarm is Disarmed'
   initial_state: 'on'
   trigger:
@@ -38,3 +55,51 @@
       data:
         target: !secret discord_channel
         message: "[ALARM] The alarm is Disarmed at {{ states('sensor.date_time') }}"
+- alias: '[Alarm] Arm away when familiy Leave Home'
+  trigger:
+    platform: state
+    entity_id: group.family_devices
+    from: 'home'
+    to: 'not_home'
+    for:
+      minutes: 5
+  condition:
+    - condition: template
+      value_template: "{{ not is_state('input_select.hass_mode', 'Guest') }}"
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: disarmed
+  action:
+    service: alarm_control_panel.alarm_arm_away
+    data:
+      entity_id: alarm_control_panel.home_alarm
+      code: !secret alarm_pin
+### --- Security Leak --- ###
+#- alias: '[Alarm] Arm away when familiy return Home'
+#  trigger:
+#    platform: state
+#    entity_id: group.family_devices
+#    from: 'not_home'
+#    to: 'home'
+#  condition:
+#    condition: state
+#    entity_id: alarm_control_panel.home_alarm
+#    state: armed_away
+#  action:
+#    service: alarm_control_panel.alarm_disarm
+#    data:
+#      entity_id: alarm_control_panel.home_alarm
+#      code: !secret alarm_pin
+- alias: '[Security] - Mockupancy'
+  initial_state: on
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "+00:10:00"
+  condition:
+    - condition: state
+      entity_id: input_select.hass_mode
+      state: 'Extended Away'
+  action:
+      service: script.turn_on
+      entity_id: script.mockupancy

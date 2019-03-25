@@ -1,0 +1,18 @@
+platform: darksky
+api_key: !secret darksky_api_key
+scan_interval: '00:05'
+forecast:
+  - 1
+  - 2
+  - 3
+monitored_conditions:
+  - summary
+  - icon
+  - temperature
+  - apparent_temperature
+  - wind_speed
+  - cloud_cover
+  - hourly_summary
+  - daily_summary
+  - temperature_high
+  - temperature_low

@@ -3,7 +3,6 @@ default_view:
   icon: mdi:home
   entities:
     - group.alarm_control_card
-    - group.climate
 
 alarm_automations_card:
     name: Alarm Automations
@@ -21,33 +20,70 @@ alarm_clock_card:
     name: Alarm Clock
     entities: 
 
-climate:
-    name: Climate
+family_devices:
+    name: Family device
+    view: false
+    entities: 
+      - device_tracker.arnaud_android
+      - device_tracker.aurelie_android
+
+climate_bathroom:
+    name: Group Climate bathroom
+    view: false
+    entities: 
+      - sensor.bathroom_temperature
+      - sensor.bathroom_humidity
+      - climate.bathroom
+
+climate_livingroom:
+    name: Group Climate livingroom
     view: false
     entities: 
       - sensor.horstmann_hrt4_zw_thermostat_transmitter_temperature
       - sensor.netatmo_indoor_humidity
-      - sensor.bedroom_leon_humidity
+      - climate.livingroom
+
+climate_leon_bedroom:
+    name: Group Climate Leon bedroom
+    view: false
+    entities: 
       - sensor.bedroom_leon_temperature
+      - sensor.bedroom_leon_humidity
+      - climate.leon_bedroom
+
+climate_office:
+    name: Group Climate office
+    view: false
+    entities: 
+      - sensor.office_temperature
+      - sensor.office_humidity
+      - climate.office
+
+climate_parent_bedroom:
+    name: Group Climate parent bedroom
+    view: false
+    entities: 
       - sensor.bedroom_parent_humidity
       - sensor.bedroom_parent_temperature
-      - sensor.bathroom_humidity
-      - sensor.bathroom_temperature
-      - climate.bathroom
-      - climate.leon_bedroom
-      - climate.livingroom
-      - climate.office
       - climate.parent_bedroom
+
+climate_weather:
+    name: Group Climate weather
+    view: false
+    entities: 
+      - sensor.netatmo_outdoor_temperature
+      - sensor.netatmo_outdoor_humidity
 
 climate_view:
     name: Climate
     view: yes
     entities: 
-      - climate.bathroom
-      - climate.leon_bedroom
-      - climate.livingroom
-      - climate.office
-      - climate.parent_bedroom
+      - group.climate_weather
+      - group.climate_livingroom
+      - group.climate_parent_bedroom
+      - group.climate_leon_bedroom
+      - group.climate_bathroom
+      - group.climate_office
 
 
 Livingroom_view:

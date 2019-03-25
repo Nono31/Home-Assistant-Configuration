@@ -14,7 +14,7 @@
     platform: state
     entity_id: sensor.livingroom_target_temperature
     #for:
-    #  seconds: 15  
+    #  seconds: 15
   action:
     - service: climate.set_temperature
       data_template:
@@ -31,8 +31,10 @@
     - platform: time
       at: '16:15:00'
     - platform: time
-      at: '06:30:00'
+      at: '05:45:00'
   condition:
+    - condition: template
+      value_template: "{{ not is_state('input_select.hass_mode', 'Extended Away') }}"
     - condition: state
       entity_id: 'binary_sensor.workday_sensor'
       state: 'on'
@@ -52,6 +54,8 @@
     - platform: time
       at: '08:00:00'
   condition:
+    - condition: template
+      value_template: "{{ not is_state('input_select.hass_mode', 'Extended Away') }}"
     - condition: state
       entity_id: 'binary_sensor.workday_sensor'
       state: 'on'
@@ -67,8 +71,10 @@
   hide_entity: True
   trigger:
     - platform: time
-      at: '07:30:00'
+      at: '05:45:00'
   condition:
+    - condition: template
+      value_template: "{{ not is_state('input_select.hass_mode', 'Extended Away') }}"
     - condition: state
       entity_id: 'binary_sensor.workday_sensor'
       state: 'off'
@@ -86,6 +92,8 @@
     - platform: time
       at: '22:00:00'
   condition:
+    - condition: template
+      value_template: "{{ not is_state('input_select.hass_mode', 'Extended Away') }}"
     - condition: state
       entity_id: 'binary_sensor.workday_sensor'
       state: 'off'

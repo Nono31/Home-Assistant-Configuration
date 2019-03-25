@@ -1,0 +1,11 @@
+return_date:
+  name: Return date from exented away
+  icon: mdi:hotel
+  has_date: true
+  has_time: true
+mockupancy_bedtime:
+  name: Mock bedtime
+  icon: mdi:hotel
+  has_date: false
+  has_time: true
+  initial: '23:00'

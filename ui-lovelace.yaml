@@ -1,0 +1,4 @@
+title: Home
+views:
+    # View tab title.
+   - !include lovelace/home_view.yaml
