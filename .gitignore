@@ -25,3 +25,6 @@ ip_bans.yaml
 !/.gitignore
 config
 ozw_config
+zones/
+*.pyc
+*.disabled
