@@ -1,7 +1,7 @@
 - alias: '[Alarm] Trigger alarm while armed away'
   trigger:
     - platform: numeric_state
-      entity_id: sensor.fibaro_system_fgms001_zw5_motion_sensor_burglar_2
+      entity_id: sensor.fibaro_system_fgms001_zw5_motion_sensor_burglar
       above: 4
     - platform: numeric_state
       entity_id: sensor.fibaro_system_fgms001_zw5_motion_sensor_burglar_2
