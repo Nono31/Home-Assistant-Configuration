@@ -1,0 +1,3 @@
+platform: switch
+name: Hallway Light
+entity_id: switch.qubino_zmnhsdx_din_dimmer_switch

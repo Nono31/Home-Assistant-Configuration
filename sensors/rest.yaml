@@ -1,0 +1,12 @@
+platform: rest
+name: teleinfo
+resource: http://192.168.1.29/json
+json_attributes:
+      - HCHC
+      - HCHP
+      - PTEC
+      - IMAX
+      - PAPP
+      - IINST
+value_template: '{{ value_json.PAPP }}'
+scan_interval: 1
