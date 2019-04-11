@@ -17,10 +17,11 @@ homeassistant:
 # http:
 #   base_url: example.duckdns.org:8123
 http:
-  api_password: !secret api_password
+#  api_password: !secret api_password
   server_port: !secret server_port
   ssl_certificate: !secret ssl_certificate_path
   ssl_key: !secret ssl_key_path
+  login_attempts_threshold: 3
 
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
