@@ -138,3 +138,6 @@ weather: !include_dir_list weather/
 climate: !include_dir_list climate/
 alarm_control_panel: !include security/alarm.yaml
 light: !include_dir_list lights/
+switch: !include_dir_list switches/
+fan: !include_dir_list fans/
+influxdb: !include influxdb.yaml
